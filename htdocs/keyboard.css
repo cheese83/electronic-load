@@ -1,0 +1,38 @@
+.keyboard {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+}
+
+.keyboard > div {
+	text-align: center;
+}
+
+.keyboard > div > button {
+	background-image: linear-gradient(0deg, #888 10%, #FFF 60%);
+	font-size: 1.2em;
+	width: 2em;
+	height: 2em;
+}
+.keyboard > div > button.width-1-5 { width: 3em; }
+.keyboard > div > button.width-2 { width: 4em; }
+.keyboard > div > button.width-8 { width: 16em; }
+.keyboard > div > button.height-2
+{
+	height: 4em;
+	position: relative;
+	bottom: 1em;
+	margin-bottom: -1em;
+	margin-top: -1em;
+}
+.keyboard > div > button.offset--1 { margin-right: 2em; }
+.keyboard > div > button:active, .keyboard > div > button.active, .keyboard.shift > div > button.shift {
+	background-image: linear-gradient(0deg, #666 20%, #CCC 60%);
+	border-style: inset;
+}
+
+.keyboard-open {
+	margin-bottom: 12em;
+}

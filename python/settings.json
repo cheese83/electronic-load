@@ -1,0 +1,43 @@
+{
+    "calibrations": {
+        "dac": {
+            "i": {
+                "offset": 0.5,
+                "gain": 418.0
+            },
+            "v": {
+                "offset": -0.02,
+                "gain": 82.3
+            }
+        },
+        "adc": {
+            "i": {
+                "offset": -0.108,
+                "gain": 2.553
+            },
+            "v": {
+                "offset": -0.0302,
+                "gain": 12.5
+            }
+        }
+    },
+    "presets": {
+        "default": {
+            "limits": {
+                "t": {
+                    "max": 0.0,
+                    "min": 0.0
+                },
+                "i": {
+                    "max": 10.0,
+                    "min": 0.0
+                },
+                "v": {
+                    "max": 50.0,
+                    "min": 0.0
+                }
+            }
+        }
+    },
+    "updatePeriod": 1.0
+}

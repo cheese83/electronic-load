@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="chartist.css">
+		<link rel="stylesheet" href="keyboard.css">
+		<link rel="stylesheet" href="site.css">
+		<title>Electronic Load</title>
+	</head>
+	<body>
+		<div class="chart-container">
+			<div class="chart ct-golden-section"></div>
+			<div class="controls">
+				<button type="button" name="start">▶</button>
+				<button type="button" name="stop" disabled>⏹</button>
+				<button type="button" name="save">💾</button>
+			</div>
+		</div>
+		<form class="config" autocomplete="off">
+			<fieldset class="chart-options">
+				<legend>Chart</legend>
+				<fieldset>
+					<legend>x</legend>
+					<label><input type="radio" name="chart-x" value="t" checked> Time/s</label>
+					<label><input type="radio" name="chart-x" value="i"> Current/A</label>
+					<label><input type="radio" name="chart-x" value="v"> Voltage/V</label>
+				</fieldset>
+				<fieldset class="chart-options-y">
+					<legend>y</legend>
+					<label><input type="checkbox" name="chart-y" value="i" checked> Current/A</label>
+					<label><input type="checkbox" name="chart-y" value="v" checked> Voltage/V</label>
+					<label><input type="checkbox" name="chart-y" value="p"> Power/W</label>
+					<label><input type="checkbox" name="chart-y" value="r"> Resistance/Ω</label>
+					<label><input type="checkbox" name="chart-y" value="q"> Charge/mAh</label>
+					<label><input type="checkbox" name="chart-y" value="e"> Energy/J</label>
+				</fieldset>
+			</fieldset>
+			<div class="tabbed">
+				<div class="tabs">
+					<label class="selected">Load</label>
+					<label>Limits</label>
+					<label>Calibration</label>
+					<label>Tools</label>
+				</div>
+				<fieldset class="load selected">
+					<div class="load-mode">
+						<fieldset>
+							<label><input type="radio" name="mode-type" value="constant" checked> Constant</label>
+							<label><input type="radio" name="mode-type" value="scripted"> Scripted</label>
+						</fieldset><!--
+						--><fieldset>
+							<label><input type="radio" name="mode-quantity" value="I" checked> Current/A</label>
+							<label><input type="radio" name="mode-quantity" value="V"> Voltage/V</label>
+						</fieldset>
+					</div>
+					<div class="load-value">
+						<fieldset class="load-value-constant selected">
+							<input type="range" name="load-slider" value="0.0" min="0.0" max="10.0" step="0.001">
+							<input type="number" name="load-number" value="0.0" min="0.0" max="10.0" step="0.001">
+						</fieldset>
+						<fieldset class="load-value-scripted">
+							<textarea cols="40" rows="4" name="load-script"></textarea>
+							<p>A Python expression. Available locals are i, v, and t.</p>
+						</fieldset>
+					</div>
+					<label>Update Period <input type="number" name="update-period" min="0.01" max="60.0" step="0.01"> s</label>
+				</fieldset>
+				<fieldset class="limits">
+					<fieldset>
+						<legend>Current</legend>
+						<label>Min <input type="number" name="limit-current-min" min="0.0" max="10.0" step="0.001"></label>
+						<label>Max <input type="number" name="limit-current-max" min="0.0" max="10.0" step="0.001"></label>
+						A
+					</fieldset>
+					<fieldset>
+						<legend>Voltage</legend>
+						<label>Min <input type="number" name="limit-voltage-min" min="0.0" max="50.0" step="0.001"></label>
+						<label>Max <input type="number" name="limit-voltage-max" min="0.0" max="50.0" step="0.001"></label>
+						V
+					</fieldset>
+					<fieldset>
+						<legend>Time</legend>
+						<label>Max <input type="number" name="limit-time-max" min="0" step="1"></label>
+						s
+					</fieldset>
+				</fieldset>
+				<fieldset class="calibration">
+					<fieldset>
+						<legend>DAC</legend>
+						<fieldset>
+							<legend>Current</legend>
+							<label>Gain <input type="number" name="calibration-dac-i-gain" min="0" step="0.001"></label>
+							<label>Offset <input type="number" name="calibration-dac-i-offset" step="0.001"></label>
+						</fieldset>
+						<fieldset>
+							<legend>Voltage</legend>
+							<label>Gain <input type="number" name="calibration-dac-v-gain" min="0" step="0.001"></label>
+							<label>Offset <input type="number" name="calibration-dac-v-offset" step="0.001"></label>
+						</fieldset>
+					</fieldset>
+					<fieldset>
+						<legend>ADC</legend>
+						<fieldset>
+							<legend>Current</legend>
+							<label>Gain <input type="number" name="calibration-adc-i-gain" min="0" step="0.001"></label>
+							<label>Offset <input type="number" name="calibration-adc-i-offset" step="0.001"></label>
+						</fieldset>
+						<fieldset>
+							<legend>Voltage</legend>
+							<label>Gain <input type="number" name="calibration-adc-v-gain" min="0" step="0.001"></label>
+							<label>Offset <input type="number" name="calibration-adc-v-offset" step="0.001"></label>
+						</fieldset>
+					</fieldset>
+				</fieldset>
+				<fieldset>
+					<div><button type="button" name="shutdown">⏻</button></div>
+					<div><button type="button" name="test-chart">Test Chart</button></div>
+				</fieldset>
+			</div>
+		</form>
+		<script src="chartist.js"></script>
+		<script src="chartist-plugin-last-point-label.js"></script>
+		<script src="keyboard.js"></script>
+		<script src="site.js"></script>
+	</body>
+</html>

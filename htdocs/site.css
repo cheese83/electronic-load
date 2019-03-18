@@ -1,0 +1,172 @@
+/* ▶, ⏹, and 💾 symbols aren't available everywhere, so supply a font with them. */
+@font-face
+{
+	font-family: "Symbola";
+	src: url("symbola_hint-subset.woff2");
+}
+
+body
+{
+	color: white;
+	background: #004030;
+	margin: 0 0.3em;
+}
+
+.ct-label { color: white; }
+.ct-point-label { fill: white; }
+.ct-grid { stroke: rgb(48, 48, 48); }
+
+.ct-series-i .ct-line, .ct-series-i .ct-point { stroke: rgb(255, 255, 0); }
+.ct-series-v .ct-line, .ct-series-v .ct-point { stroke: rgb(0, 255, 255); }
+.ct-series-p .ct-line, .ct-series-p .ct-point { stroke: rgb(255, 0, 0); }
+.ct-series-r .ct-line, .ct-series-r .ct-point { stroke: rgb(0, 255, 0); }
+.ct-series-q .ct-line, .ct-series-q .ct-point { stroke: rgb(0, 0, 255); }
+.ct-series-e .ct-line, .ct-series-e .ct-point { stroke: rgb(255, 0, 255); }
+
+/* Checkboxes can't have their border styled in CSS, so use outline instead. */
+.chart-options-y input { outline-style: solid; outline-width: 0.2em; }
+.chart-options-y input[value=i] { outline-color: rgb(255, 255, 0); }
+.chart-options-y input[value=v] { outline-color: rgb(0, 255, 255); }
+.chart-options-y input[value=p] { outline-color: rgb(255, 0, 0); }
+.chart-options-y input[value=r] { outline-color: rgb(0, 255, 0); }
+.chart-options-y input[value=q] { outline-color: rgb(0, 0, 255); }
+.chart-options-y input[value=e] { outline-color: rgb(255, 0, 255); }
+
+.chart-container { margin-top: 0.5em; }
+
+fieldset, .chart-container
+{
+	border-style: outset;
+	border-width: 0.1em;
+	border-radius: 0.5em;
+	border-color: #107060;
+	background-color: black;
+	box-shadow: 0 0 1em rgba(0, 0, 0, 0.7);
+}
+fieldset
+{
+	padding: 0.5em;
+	padding-top: 0;
+	margin: 0;
+}
+fieldset > fieldset { padding-top: 0; }
+
+button
+{
+	border-style: outset;
+	background-color: #EEE;
+	border-radius: 0.25em;
+	border-color: #308080;
+}
+button[disabled]
+{
+	border-style: inset;
+	background-color: #CCC;
+}
+
+input { border-radius: 0.25em; }
+textarea { border-radius: 0.5em; padding: 0.5em; }
+
+.controls { padding: 0 0 1em 1em; }
+.controls button
+{
+	font-family: "Symbola";
+	font-size: 1.5em;
+	margin-right: 0.5em;
+}
+button[name=shutdown]
+{
+	/* The Unicode power symbol is not available on any of my devices, so use an image instead. */
+	color: transparent;
+	background-image: url('IEC5009_Standby_Symbol.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin: 0.5em 0;
+	width: 2em;
+	height: 2em;
+	padding: 0.25em;
+	border-radius: 1em;
+	background-origin: content-box;
+	font-size: 2em;
+}
+
+.config input[type=number], .config input[type=text] { max-width: 4.5em; }
+
+.chart-options label
+{
+	white-space: nowrap;
+	min-width: 7em;
+	display: inline-block;
+	padding: 0.1em 0;
+}
+
+.load-mode > fieldset
+{
+	display: inline-block;
+	padding-top: 0.4em;
+	margin-top: 0.5em;
+	width: calc(50% - 0.25em);
+	max-width: 12em;
+	box-sizing: border-box;
+}
+.load-mode > fieldset:last-of-type { margin-left: 0.5em; }
+.load-mode > fieldset > label { display: block; }
+.load-value
+{
+	margin-top: 1.3em;
+	margin-bottom: 0.5em;
+}
+.load-value fieldset
+{
+	border: none;
+	padding: 0;
+	box-shadow: none;
+}
+.load-value input[type=range] { width: 19em; }
+.load-value > fieldset:not(.selected) { display: none; }
+textarea[name=load-script]
+{
+	width: 100%;
+	box-sizing: border-box;
+}
+.load-value-scripted
+{
+	background-color: #004030;
+	color: #DDD;
+}
+.load-value-scripted > p { margin: 0.3em 0.5em; }
+
+.tabbed { padding-top: 1.5em; }
+.tabs label
+{
+	border-style: outset;
+	border-width: 0.1em;
+	border-radius: 0.5em;
+	border-color: #308080;
+
+	border-bottom-style: none;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	padding: 0.5em 1em;
+	background-color: black;
+	position: relative;
+	bottom: 0.35em;
+}
+.tabs label.selected { z-index: 2; }
+.tabs label:not(.selected) { color: #AAA; }
+.tabbed > fieldset
+{
+	position: relative;
+	z-index: 1;
+	border-top-left-radius: 0;
+	padding-top: 0.3em;
+}
+.tabbed > fieldset:not(.selected) { display: none; }
+
+@media (min-aspect-ratio: 3/2)
+{
+	.chart-container { display: inline-block; width: 50%; vertical-align: top; }
+	.chart:before { padding-bottom: 100%; }
+	.config { display: inline-block; width: 49%; vertical-align: top; }
+}
