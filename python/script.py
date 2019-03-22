@@ -256,3 +256,13 @@ def stop():
 @webiopi.macro('POST', 'shutdown', 'text/plain')
 def shutdown():
 	return subprocess.check_output(['sudo', 'shutdown', 'now'])
+
+@webiopi.macro('POST', 'brightness', 'text/plain')
+def brightness(path):
+	actualBrightness = int(subprocess.check_output(['cat', '/sys/class/backlight/rpi_backlight/actual_brightness']))
+	increment = 10 if path == 'up' else -10
+	value = min(max(int(actualBrightness + increment), 15), 200)
+
+	subprocess.check_output(['sudo', 'bash', '-c', 'echo ' + str(value) + ' > /sys/class/backlight/rpi_backlight/brightness'])
+
+	return value

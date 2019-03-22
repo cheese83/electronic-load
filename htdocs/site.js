@@ -477,6 +477,15 @@
 			ajax('POST', 'shutdown');
 		});
 
+		document.querySelector('.brightness').addEventListener('click', function (event) {
+			if (event.target.name !== 'brightness') {
+				return;
+			}
+
+			ajax('POST', `brightness/${event.target.value}`)
+				.catch(error => console.error('Failed to set brightness.', error));
+		});
+
 		document.querySelector('button[name=test-chart]').addEventListener('click', function (event) {
 			var i;
 			rawData.length = 0;

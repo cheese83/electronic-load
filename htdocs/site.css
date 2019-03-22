@@ -75,22 +75,6 @@ textarea { border-radius: 0.5em; padding: 0.5em; }
 	font-size: 1.5em;
 	margin-right: 0.5em;
 }
-button[name=shutdown]
-{
-	/* The Unicode power symbol is not available on any of my devices, so use an image instead. */
-	color: transparent;
-	background-image: url('IEC5009_Standby_Symbol.svg');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	margin: 0.5em 0;
-	width: 2em;
-	height: 2em;
-	padding: 0.25em;
-	border-radius: 1em;
-	background-origin: content-box;
-	font-size: 2em;
-}
 
 .config input[type=number], .config input[type=text] { max-width: 4.5em; }
 
@@ -137,6 +121,33 @@ textarea[name=load-script]
 	color: #DDD;
 }
 .load-value-scripted > p { margin: 0.3em 0.5em; }
+
+.tools fieldset
+{
+	display: inline-block;
+	height: 5.3em;
+	vertical-align: top;
+	padding: 0.5em;
+}
+.tools > fieldset > button
+{
+	width: 2em;
+	height: 2em;
+	padding: 0.25em;
+	border-radius: 1em;
+	font-size: 2em;
+}
+button[name=shutdown]
+{
+	/* The Unicode power symbol is not available on any of my devices, so use an image instead. */
+	color: transparent;
+	background-image: url('IEC5009_Standby_Symbol.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-origin: content-box;
+}
+button[name=test-chart] { margin-top: 1em; }
 
 .tabbed { padding-top: 1.5em; }
 .tabs label
