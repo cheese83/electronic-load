@@ -15,6 +15,7 @@ body
 .ct-label { color: white; }
 .ct-point-label { fill: white; }
 .ct-grid { stroke: rgb(48, 48, 48); }
+.ct-chart-line { overflow: visible; }
 
 .ct-series-i .ct-line, .ct-series-i .ct-point { stroke: rgb(255, 255, 0); }
 .ct-series-v .ct-line, .ct-series-v .ct-point { stroke: rgb(0, 255, 255); }
