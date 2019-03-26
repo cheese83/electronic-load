@@ -178,8 +178,6 @@ button[name=test-chart] { margin-top: 1em; }
 
 @media (min-aspect-ratio: 3/2) and (min-width: 45em)
 {
-	.chart-container, .config { display: inline-block; box-sizing: border-box; vertical-align: top; }
-	.chart-container { width: 50%; }
+	.chart-container, .config { display: inline-block; box-sizing: border-box; width: calc(50% - 0.15em); vertical-align: top; }
 	.chart:before { padding-bottom: 100%; }
-	.config { width: 49%; }
 }
