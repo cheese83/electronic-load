@@ -500,6 +500,11 @@
 			initChart();
 		});
 
+		document.querySelector('input[name=enable-keyboard]').addEventListener('change', function (event) {
+			localStorage.setItem('enable-keyboard', event.target.checked);
+		});
+		document.querySelector('input[name=enable-keyboard]').checked = JSON.parse(localStorage.getItem('enable-keyboard') || 'false');
+
 		loadCalibrations()
 			.then(loadLimits)
 			.then(loadUpdatePeriod)

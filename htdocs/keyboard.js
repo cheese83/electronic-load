@@ -1,11 +1,6 @@
 (function () {
 	'use strict';
 
-	if (!('ontouchstart' in window)) {
-		// Only use the keyboard for touchscreens.
-		return;
-	}
-
 	const del = function (input, count) {
 			const selectionStart = input.selectionStart,
 				selectionEnd = input.selectionEnd;
@@ -223,10 +218,22 @@
 				keyboard.parentNode.removeChild(keyboard);
 				document.querySelector('body').classList.remove('keyboard-open');
 			}
+		},
+		keyboardEnabled = function () {
+			try
+			{
+				return JSON.parse(localStorage.getItem('enable-keyboard') || 'false');
+			}
+			catch (error)
+			{
+				// If this is being run by directly opening a local .html file, for debugging perhaps, then access to localStorage will be denied.
+				// Fall back to showing the keyboard on all touchscreens.
+				return ('ontouchstart' in window);
+			}
 		};
 
 	document.querySelector('body').addEventListener('focusin', function (event) {
-		if (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA') {
+		if (keyboardEnabled() && (event.target.nodeName === 'INPUT' || event.target.nodeName === 'TEXTAREA')) {
 			const input = event.target,
 				inputType = event.target.nodeName === 'TEXTAREA' ? 'text' : (input.dataset.originalType || input.type),
 				keyboardType = inputType === 'number' ? 'numeric' :
