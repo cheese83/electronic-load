@@ -176,9 +176,10 @@ button[name=test-chart] { margin-top: 1em; }
 }
 .tabbed > fieldset:not(.selected) { display: none; }
 
-@media (min-aspect-ratio: 3/2)
+@media (min-aspect-ratio: 3/2) and (min-width: 45em)
 {
-	.chart-container { display: inline-block; width: 50%; vertical-align: top; }
+	.chart-container, .config { display: inline-block; box-sizing: border-box; vertical-align: top; }
+	.chart-container { width: 50%; }
 	.chart:before { padding-bottom: 100%; }
-	.config { display: inline-block; width: 49%; vertical-align: top; }
+	.config { width: 49%; }
 }
