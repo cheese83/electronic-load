@@ -180,7 +180,17 @@
 			axisX: {
 				type: Chartist.AutoScaleAxis,
 				onlyInteger: true,
-				low: 0
+				low: 0,
+				scaleMinSpace: 30,
+				labelInterpolationFnc: function (value) {
+					if (!chartIsOverTime()) {
+						return value;
+					}
+					const hours = Math.floor(value / 3600),
+						minutes = Math.floor((value - hours) / 60),
+						seconds = value % 60;
+					return `${hours ? hours + ':' : ''}${hours || minutes ? minutes.toString().padStart(hours ? 2 : 1, '0') + ':' : ''}${seconds.toString().padStart(hours || minutes ? 2 : 1, '0')}`
+				}
 			},
 			axisY: {
 				type: Chartist.AutoScaleAxis,
@@ -225,6 +235,7 @@
 				label: input.parentNode.textContent.trim()
 			};
 		},
+		chartIsOverTime = () => getXValue().quantity === 't',
 		getYValues = function () {
 			return Array.from(document.querySelectorAll('input[name=chart-y]:checked')).map(input => {
 				return {
@@ -261,7 +272,7 @@
 		initChart = function () {
 			const xValue = getXValue(),
 				yValues = getYValues(),
-				isOverTime = xValue.quantity === 't',
+				isOverTime = chartIsOverTime(),
 				options = {
 					showLine: isOverTime,
 					showPoint: !isOverTime
