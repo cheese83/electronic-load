@@ -58,18 +58,21 @@
 			}
 		},
 		incrementDigit = function (input, amount) {
-			const selectionStart = input.selectionStart,
-				decimalPosition = (input.value.indexOf('.') + 1) || (input.value.length + 1),
+			const hadValue = !!input.value.length,
+				originalValue = hadValue ? parseFloat(input.value) : 0,
+				selectionStart = Math.max(input.selectionStart - (originalValue < 0 ? 1 : 0), 0), // Subtract one if value is negative so that the '-' character doesn't cause everything to be off by one position.
+				decimalPosition = ((input.value.indexOf('.') + 1) || (input.value.length + 1)) - (originalValue < 0 ? 1 : 0),
 				incrementMagnitude = input.value.length
 					? Math.max(Math.pow(10, (decimalPosition - selectionStart) - (decimalPosition > selectionStart ? 1 : 0)), input.step || 1)
 					: input.step || 1,
-				hadValue = !!input.value.length,
-				originalValue = hadValue ? parseFloat(input.value) : 0,
-				newValue = Math.max(Math.min(originalValue + (incrementMagnitude * amount), input.max), input.min),
+				min = input.min.length ? parseFloat(input.min) : Number.NEGATIVE_INFINITY,
+				max = input.max.length ? parseFloat(input.max) : Number.POSITIVE_INFINITY,
+				newValue = Math.max(Math.min(originalValue + (incrementMagnitude * amount), max), min),
 				decimalPlaces = input.step < 1 ? (input.step.substring(input.step.indexOf('.')).length - 1) : 0;
 
 			input.value = newValue.toFixed(decimalPlaces);
-			const newSelectionStart = hadValue ? selectionStart : input.value.length;
+			const minSelectionStart = newValue < 0 ? 2 : 1, // Move one to the right if the increment added a digit, so that incrementing again increments the same digit.
+				newSelectionStart = hadValue ? Math.max(selectionStart, minSelectionStart) : input.value.length;
 			input.setSelectionRange(newSelectionStart, newSelectionStart);
 		},
 		keys ={
