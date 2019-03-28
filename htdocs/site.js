@@ -121,6 +121,12 @@
 
 			calculated[xValue.quantity] = valueFromRaw(datum, previousCalculatedDatum, xValue.quantity);
 			yValues.forEach(yValue => calculated[yValue.quantity] = valueFromRaw(datum, previousCalculatedDatum, yValue.quantity));
+
+			//Always include time, as it is necessary for calculating subsequent values of e and q.
+			if (xValue !== 't') {
+				calculated['t'] = valueFromRaw(datum, previousCalculatedDatum, 't');
+			}
+
 			calculatedData.push(calculated);
 			yValues.forEach((yValue, i) => chartData[i].data.push({ x: calculated[xValue.quantity], y: calculated[yValue.quantity] }));
 		};
