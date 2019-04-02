@@ -415,6 +415,8 @@
 				startButton.setAttribute('disabled', '');
 				stopButton.removeAttribute('disabled');
 				saveLoad()
+					.then(saveUpdatePeriod)
+					.then(saveLimits)
 					.then(() => ajax('POST', 'start'))
 					.then(data => console.log('Started at ' + data))
 					.catch(error => console.error('Failed to start', error));
