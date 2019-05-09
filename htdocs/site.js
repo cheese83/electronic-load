@@ -193,7 +193,7 @@
 						return value;
 					}
 					const hours = Math.floor(value / 3600),
-						minutes = Math.floor((value - hours) / 60),
+						minutes = Math.floor((value / 60) % 60),
 						seconds = value % 60;
 					return `${hours ? hours + ':' : ''}${hours || minutes ? minutes.toString().padStart(hours ? 2 : 1, '0') + ':' : ''}${seconds.toString().padStart(hours || minutes ? 2 : 1, '0')}`
 				}
