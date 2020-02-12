@@ -82,7 +82,10 @@ def loop():
 	if limitsExceeded:
 		stop()
 
-	runScript({ 'i': i, 'v': v, 't': t })
+	try:
+		runScript({ 'i': i, 'v': v, 't': t })
+	except Exception:
+		stop()
 
 # destroy function is called at WebIOPi shutdown
 def destroy():
@@ -232,10 +235,10 @@ def start():
 	global lastReadingTime
 
 	if not isRunning():
+		runScript({ 'i': None, 'v': None, 't': 0 })
 		startTime = datetime.now(timezone.utc)
 		stopTime = None
 		lastReadingTime = startTime
-		runScript({ 'i': None, 'v': None, 't': 0 })
 		enableOutput()
 		del readings[:]
 
