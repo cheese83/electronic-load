@@ -11,7 +11,7 @@ from settings import ElectronicLoadSettings, Limits, Calibrations
 from jsonutils import RecursiveJsonSerializer
 
 ADC_I_CHANNEL = 0
-ADC_V_CHANNEL = 1
+ADC_V_CHANNEL = 3
 DAC_CHANNEL = 0
 
 CCS_GPIO = 17
@@ -93,10 +93,10 @@ def destroy():
 	GPIO.digitalWrite(CVS_GPIO, GPIO.LOW)
 
 def readCurrent():
-	return settings.calibrations.adc.i.apply(adc.analogReadVolt(ADC_I_CHANNEL))
+	return settings.calibrations.adc.i.apply(adc.analogReadVolt(ADC_I_CHANNEL, diff=True))
 
 def readVoltage():
-	return settings.calibrations.adc.v.apply(adc.analogReadVolt(ADC_V_CHANNEL))
+	return settings.calibrations.adc.v.apply(adc.analogReadVolt(ADC_V_CHANNEL, diff=True))
 
 def enableOutput():
 	if mode == 'CC':

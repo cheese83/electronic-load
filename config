@@ -95,7 +95,7 @@ multicast = false
 #adc1 = MCP3008 chip:1 vref:5
 #dac1 = MCP4922 chip:1
 
-ADC = ADS1115 datarate:7 mode:1
+ADC = ADS1115 datarate:7 mode:1 gain:0x4
 DAC = MCP4725 slave:0x62 vref:5
 
 #------------------------------------------------------------------------#
