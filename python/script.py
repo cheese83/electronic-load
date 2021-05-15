@@ -66,11 +66,10 @@ def loop():
 	accumulatedReadings['i'].append(i)
 	accumulatedReadings['v'].append(v)
 	deltaSeconds = (now - lastReadingTime).total_seconds()
-	limitsExceeded = settings.limits.exceeded(i, v, t)
 
 	# Read from the ADC as fast as possible, but only return a reading at the predefined rate.
 	# All the extra readings can be averaged together to reduce noise, i.e. oversampling.
-	if deltaSeconds >= settings.updatePeriod or limitsExceeded:
+	if deltaSeconds >= settings.updatePeriod:
 		lastReadingTime = now
 		averageCurrent = sum(accumulatedReadings['i']) / float(len(accumulatedReadings['i']))
 		averageVoltage = sum(accumulatedReadings['v']) / float(len(accumulatedReadings['v']))
@@ -78,9 +77,8 @@ def loop():
 		readings.append(lastReading)
 		del accumulatedReadings['i'][:]
 		del accumulatedReadings['v'][:]
-
-	if limitsExceeded:
-		stop()
+		if settings.limits.exceeded(averageCurrent, averageVoltage, t):
+			stop()
 
 	try:
 		runScript({ 'i': i, 'v': v, 't': t })
